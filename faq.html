@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bantuan & FAQ | Depstore</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #000; --card: #0a0a0a; --border: #1a1a1a; --text: #a1a1aa; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg); color: #fff; padding: 50px 10%; line-height: 1.8; }
+        .wrapper { max-width: 900px; margin: 0 auto; }
+        .nav-back { color: #fff; text-decoration: none; font-size: 0.8rem; font-weight: 700; opacity: 0.5; transition: 0.3s; margin-bottom: 30px; display: inline-block; }
+        .nav-back:hover { opacity: 1; }
+        h1 { font-size: 2.5rem; letter-spacing: -1.5px; margin-bottom: 40px; }
+        .faq-box { margin-bottom: 40px; border-bottom: 1px solid var(--border); padding-bottom: 30px; }
+        .faq-box h2 { font-size: 1.2rem; margin-bottom: 15px; color: #fff; display: flex; align-items: center; gap: 10px; }
+        .faq-box p { color: var(--text); font-size: 0.95rem; text-align: justify; margin-bottom: 10px; }
+        .highlight { color: #fff; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <a href="dashboard.html" class="nav-back">← KEMBALI KE PANEL</a>
+        <h1>Pertanyaan Umum & Pusat Bantuan</h1>
+
+        <div class="faq-box">
+            <h2>Bagaimana Mekanisme Otomasi Depstore Bekerja?</h2>
+            <p>Sistem ini merupakan jembatan integrasi antara dashboard user dengan <span class="highlight">Application Programming Interface (API)</span> milik Pterodactyl. Ketika Anda mengisi formulir deployment, backend kami melakukan validasi ketersediaan resource pada node yang ditunjuk. Jika valid, sistem akan mengirimkan payload JSON berisi instruksi pembuatan user baru, pembuatan database, dan alokasi port secara bersamaan. Seluruh proses ini berjalan di latar belakang tanpa memerlukan intervensi administratif manusia secara langsung.</p>
+        </div>
+
+        <div class="faq-box">
+            <h2>Mengapa Deployment Saya Mengalami Kegagalan (Error)?</h2>
+            <p>Kegagalan deployment dapat disebabkan oleh berbagai faktor teknis yang kompleks. Pertama, <span class="highlight">Conflict Data</span>; jika email atau username yang Anda masukkan sudah pernah terdaftar di database panel utama, sistem akan menolak permintaan baru untuk mencegah duplikasi data. Kedua, <span class="highlight">Resource Exhaustion</span>; setiap node memiliki limitasi fisik pada CPU dan RAM. Jika node mencapai kapasitas 100%, API akan mengembalikan kode error 500. Ketiga, masalah pada sistem daemon (Wings) yang mungkin sedang dalam status offline atau maintenance.</p>
+        </div>
+
+        <div class="faq-box">
+            <h2>Apakah RAM Unlimited Benar-Benar Tanpa Batas?</h2>
+            <p>Dalam istilah teknis, paket <span class="highlight">Unlimited RAM</span> berarti sistem tidak menetapkan batasan kuota pada level Docker Container. Namun, performa server Anda tetap bergantung pada total kapasitas fisik RAM yang tersedia pada Node. Penggunaan RAM yang terlalu masif (misal: kebocoran memori pada script Java) tetap dapat menyebabkan proses "Out of Memory" (OOM) Killer yang dilakukan secara otomatis oleh Kernel Linux untuk menjaga stabilitas node utama.</p>
+        </div>
+
+        <div class="faq-box">
+            <h2>Bagaimana Cara Mengonfigurasi Server Setelah Selesai Deploy?</h2>
+            <p>Setelah mendapatkan password dari dashboard, Anda harus segera melakukan login ke panel utama. Di sana, Anda memiliki kontrol penuh atas <span class="highlight">Startup Command, Environment Variables, dan File Manager</span>. Anda dapat mengunggah file melalui SFTP atau File Manager bawaan browser. Jika Anda ingin mengganti versi bahasa pemrograman (misal dari Node.js 16 ke 20), Anda bisa mencarinya di menu "Settings" lalu ganti Docker Image sesuai dengan ketersediaan Egg yang ada.</p>
+        </div>
+
+        <div class="faq-box">
+            <h2>Apakah Layanan Ini Memiliki Dukungan Teknis 24/7?</h2>
+            <p>Depstore dioperasikan oleh komunitas Developer. Meskipun sistem berjalan secara otomatis selama 24 jam, dukungan teknis manusia dilakukan secara sukarela. Jika Anda menemukan bug pada sistem dashboard atau kegagalan API, sangat disarankan untuk melampirkan screenshot log error kepada pihak pengelola melalui saluran komunikasi resmi yang tersedia di profil developer.</p>
+        </div>
+    </div>
+</body>
+</html>
