@@ -1,0 +1,43 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "index.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/login",
+      "dest": "index.js"
+    },
+    {
+      "src": "/register",
+      "dest": "index.js"
+    },
+    {
+      "src": "/create",
+      "dest": "index.js"
+    },
+    {
+      "src": "/requests",
+      "dest": "index.js"
+    },
+    {
+      "src": "/confirm-user",
+      "dest": "index.js"
+    },
+    {
+      "src": "/update-profile",
+      "dest": "index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}
