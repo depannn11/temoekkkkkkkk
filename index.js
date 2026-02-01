@@ -56,6 +56,10 @@ app.post("/login", (req, res) => {
     res.json({ success: true, user: { nama: user.nama, role: user.kategori } });
 });
 
+app.get("/register", (req, res) => {
+    res.sendFile(path.join(__dirname, "register.html"));
+});
+
 app.post("/register", (req, res) => {
     const { nama, password } = req.body;
     const requests = getData(REQ_PATH);
