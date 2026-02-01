@@ -100,4 +100,4 @@ async function confirmUser(u, a) {
     fetchRequests();
 }
 
-function logout() { sessionStorage.clear(); window.location.href = "index.html"; }
+function logout() { sessionStorage.clear(); window.location.href = "/"; }
