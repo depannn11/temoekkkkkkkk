@@ -1,4 +1,4 @@
-const API_URL = "https://pterodactyl.depstore.my.id";
+const API_URL = window.location.origin
 
 function toggleMenu() {
     document.querySelector('.burger').classList.toggle('active');
