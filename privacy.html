@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kebijakan Privasi | Depstore</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #000; --border: #1a1a1a; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg); color: #fff; padding: 60px 10%; line-height: 1.8; }
+        .content { max-width: 900px; margin: 0 auto; }
+        h1 { font-size: 2.2rem; margin-bottom: 20px; letter-spacing: -1px; }
+        h4 { color: #fff; margin: 25px 0 10px; font-size: 1.1rem; }
+        p { color: #888; font-size: 0.95rem; margin-bottom: 20px; text-align: justify; }
+        .section-box { border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <a href="dashboard.html" style="color:#fff; text-decoration:none; font-size:0.8rem;">← KEMBALI</a>
+        <h1>Privacy Policy</h1>
+        
+        <div class="section-box">
+            <h4>1. Jenis Data Yang Dikumpulkan</h4>
+            <p>Kami mengumpulkan informasi minimal untuk memvalidasi identitas Anda sebagai pengguna unik. Data ini meliputi: Nama/Username yang digunakan untuk identifikasi akun, alamat email aktif untuk pengiriman notifikasi deployment, dan alamat IP untuk keperluan audit keamanan dan pencegahan penyalahgunaan sistem.</p>
+        </div>
+
+        <div class="section-box">
+            <h4>2. Enkripsi dan Keamanan</h4>
+            <p>Keamanan data Anda adalah prioritas utama. Semua kata sandi yang Anda buat dienkripsi menggunakan algoritma <span style="color:#fff;">bcrypt</span> dengan salt tinggi sebelum disimpan ke database. Ini berarti bahkan administrator database kami pun tidak dapat membaca kata sandi Anda dalam bentuk teks asli. Komunikasi antara dashboard dan panel Pterodactyl dilindungi oleh enkripsi SSL/TLS 256-bit.</p>
+        </div>
+
+        <div class="section-box">
+            <h4>3. Berbagi Data Dengan Pihak Ketiga</h4>
+            <p>Depstore secara tegas menyatakan bahwa kami tidak akan menjual, menyewakan, atau memberikan data pribadi Anda kepada agen pemasaran atau pihak ketiga mana pun. Data email Anda hanya dibagikan kepada sistem API Pterodactyl untuk pembuatan akun teknis pada panel kontrol server.</p>
+        </div>
+
+        <div class="section-box">
+            <h4>4. Penyimpanan Sesi (Session Handling)</h4>
+            <p>Dashboard menggunakan Session Storage untuk melacak sesi login Anda. Sesi ini hanya bersifat sementara di browser Anda dan akan segera dimusnahkan saat Anda menekan tombol Logout atau menutup tab browser. Kami tidak menyimpan tracking cookies jangka panjang yang bersifat invasif terhadap privasi Anda.</p>
+        </div>
+
+        <div class="section-box">
+            <h4>5. Hak Pengguna</h4>
+            <p>Anda berhak untuk meminta penghapusan seluruh data terkait akun Anda dari sistem kami. Silakan hubungi Developer jika Anda ingin menutup akun dan menghapus seluruh data deployment yang pernah Anda lakukan secara permanen.</p>
+        </div>
+    </div>
+</body>
+</html>
