@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pterodactyl | Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --bg: #030303; --card: rgba(18, 18, 18, 0.7); 
+            --border: rgba(255, 255, 255, 0.08); --accent: #3b82f6; 
+            --accent-glow: rgba(59, 130, 246, 0.3); --glass: blur(20px);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { 
+            background: var(--bg); color: #fff; height: 100vh; overflow: hidden;
+            background-image: radial-gradient(circle at 50% -20%, #1e1b4b 0%, transparent 50%);
+        }
+        nav { 
+            position: fixed; top: 0; width: 100%; padding: 18px 6%; 
+            display: flex; justify-content: space-between; align-items: center; 
+            z-index: 100; backdrop-filter: var(--glass); border-bottom: 1px solid var(--border);
+        }
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.5px; }
+        .burger { 
+            cursor: pointer; width: 40px; height: 40px; border-radius: 12px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+            background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+        }
+        .burger div { width: 20px; height: 2px; background: #fff; transition: 0.3s; }
+        .burger.active .line1 { transform: rotate(45deg) translate(5px, 5px); }
+        .burger.active .line2 { opacity: 0; }
+        .burger.active .line3 { transform: rotate(-45deg) translate(5px, -5px); }
+        .menu-overlay { 
+            position: fixed; top: 0; right: -100%; width: 300px; height: 100vh; 
+            background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(30px);
+            border-left: 1px solid var(--border); transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
+            z-index: 1000; padding: 100px 25px 40px; display: flex; flex-direction: column;
+        }
+        .menu-overlay.active { right: 0; }
+        .user-card { padding: 20px; background: rgba(255,255,255,0.03); border-radius: 16px; border: 1px solid var(--border); margin-bottom: 25px; }
+        .user-card p { font-weight: 800; font-size: 1rem; }
+        .user-card span { font-size: 0.7rem; color: var(--accent); font-weight: 700; text-transform: uppercase; }
+        .nav-label { font-size: 0.65rem; color: #444; font-weight: 800; padding: 15px 10px 5px; text-transform: uppercase; letter-spacing: 1.5px; }
+        .nav-link { 
+            color: #94a3b8; text-decoration: none; font-size: 0.9rem; font-weight: 600; 
+            padding: 12px 15px; border-radius: 12px; transition: 0.3s; display: block;
+        }
+        .nav-link:hover, .nav-link.active { color: #fff; background: rgba(59, 130, 246, 0.1); border-left: 3px solid var(--accent); }
+        main { padding: 110px 6% 40px; height: 100vh; overflow-y: auto; }
+        .glass-box { 
+            background: var(--card); border: 1px solid var(--border); border-radius: 24px; 
+            padding: 35px; max-width: 600px; margin: 0 auto; box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+        h2 { font-size: 1.3rem; font-weight: 800; margin-bottom: 25px; letter-spacing: -0.5px; }
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        label { display: block; font-size: 0.7rem; color: #64748b; margin-bottom: 8px; font-weight: 700; text-transform: uppercase; }
+        input, select { 
+            width: 100%; padding: 14px; background: rgba(0,0,0,0.2); 
+            border: 1px solid var(--border); border-radius: 14px; color: #fff; font-size: 0.9rem;
+        }
+        input:focus { outline: none; border-color: var(--accent); }
+        .btn-prime { 
+            width: 100%; padding: 16px; border-radius: 14px; border: none; 
+            background: var(--accent); color: #fff; font-weight: 800; cursor: pointer;
+            box-shadow: 0 8px 20px var(--accent-glow); transition: 0.3s;
+        }
+        .btn-prime:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .res-msg { margin-top: 20px; padding: 15px; border-radius: 12px; font-size: 0.85rem; display: none; border: 1px solid var(--border); }
+        .content-section { display: none; }
+        .content-section.active { display: block; animation: fadeInUp 0.5s ease forwards; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 600px) { .input-row { grid-template-columns: 1fr; } .menu-overlay { width: 100%; } }
+    </style>
+</head>
+<body>
+<nav>
+    <div class="logo">
+        <img src="https://img1.pixhost.to/images/6755/615340015_imgtmp.jpg" width="28" style="border-radius:6px">
+        <span>PTERODACTYL</span>
+    </div>
+    <div class="burger" onclick="toggleMenu()">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+    </div>
+</nav>
+<div class="menu-overlay">
+    <div class="user-card">
+        <p id="userName">...</p>
+        <span id="roleBadge">...</span>
+    </div>
+    <div class="nav-label">Management</div>
+    <a class="nav-link active" data-section="create" onclick="toggleMenu()">Deploy Server</a>
+    <a class="nav-link admin-only" data-section="requests" onclick="toggleMenu()">Pending Requests</a>
+    <div class="nav-label">Settings</div>
+    <a class="nav-link" data-section="profile" onclick="toggleMenu()">Edit Security</a>
+    <div class="nav-label">Legal</div>
+    <a href="faq.html" class="nav-link">FAQ</a>
+    <a href="terms.html" class="nav-link">Terms of Service</a>
+    <a href="privacy.html" class="nav-link">Privacy Policy</a>
+    <a href="#" onclick="logout()" class="nav-link" style="margin-top:auto; color:#ef4444; border-top:1px solid var(--border); padding-top:20px">Logout Account</a>
+</div>
+<main>
+    <section id="create" class="content-section active">
+        <div class="glass-box">
+            <h2>Instance Deployment</h2>
+            <div class="input-row">
+                <div>
+                    <label>Username</label>
+                    <input type="text" id="c_user" placeholder="username">
+                </div>
+                <div>
+                    <label>Email</label>
+                    <input type="email" id="c_email" placeholder="mail@mail.com">
+                </div>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label>RAM Allocation</label>
+                <select id="c_ram">
+                    <option value="1024">1 GB RAM</option>
+                    <option value="2048">2 GB RAM</option>
+                    <option value="3072">3 GB RAM</option>
+                    <option value="4096">4 GB RAM</option>
+                    <option value="5120">5 GB RAM</option>
+                    <option value="6144">6 GB RAM</option>
+                    <option value="7168">7 GB RAM</option>
+                    <option value="8192">8 GB RAM</option>
+                    <option value="9216">9 GB RAM</option>
+                    <option value="10240">10 GB RAM</option>
+                    <option value="0">Unlimited RAM</option>
+                </select>
+            </div>
+            <button class="btn-prime" onclick="createServer()">Deploy Now</button>
+            <div id="c_result" class="res-msg"></div>
+        </div>
+    </section>
+    <section id="profile" class="content-section">
+        <div class="glass-box">
+            <h2>Account Security</h2>
+            <label>New Username</label>
+            <input type="text" id="new_name" placeholder="Enter new username">
+            <button class="btn-prime" style="margin: 10px 0 25px; background: rgba(255,255,255,0.05);" onclick="updateProfile('name')">Update Name</button>
+            <label>New Password</label>
+            <input type="password" id="new_pass" placeholder="••••••••">
+            <button class="btn-prime" style="margin-top:10px;" onclick="updateProfile('pass')">Secure Password</button>
+            <div id="p_result" class="res-msg"></div>
+        </div>
+    </section>
+    <section id="requests" class="content-section admin-only">
+        <div class="glass-box">
+            <h2>Approval Queue</h2>
+            <div id="requestList"></div>
+        </div>
+    </section>
+</main>
+<script src="script.js"></script>
+<script>
+    function toggleMenu() {
+        document.querySelector('.burger').classList.toggle('active');
+        document.querySelector('.menu-overlay').classList.toggle('active');
+    }
+</script>
+</body>
+</html>
