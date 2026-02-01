@@ -28,8 +28,8 @@ const saveData = (p, d) => {
     }
 };
 
-const apikey = "ptlc_xnU77ND3STp01jeh49ikjVzxc4GiKvswjUp71uK5FP9";
-const domain = "https://pterodactyl.depstore.my.id";
+const apikey = "ptla_Mtz9iAewLPD7hyh6KcFo0C2k746isiQqrkGTIsxwaTI";
+const domain = "https://depstore11-private.shanydev.web.id";
 const nestid = "5";
 const egg = "15";
 const loc = "1";
